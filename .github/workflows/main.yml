@@ -1,4 +1,4 @@
-name: Ruby CI
+name: RSpec Tests
 
 on:
   push:
@@ -9,24 +9,22 @@ on:
       - master
 
 jobs:
-  build:
+  rspec:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+      
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2.3'  # Specify the Ruby version you want to use
+        ruby-version: 3.2.3 # Change this to your desired Ruby version
 
     - name: Install dependencies
       run: |
         gem install bundler
-        
+        bundle install
 
-    - name: Run tests
-      run: |
-        bundle exec rspec
-
+    - name: Run RSpec
+      run: bundle exec rspec
